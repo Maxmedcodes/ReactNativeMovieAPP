@@ -12,7 +12,7 @@ headers:{
 
 export const fetchMovies = async({query}: { query : string})=>{
     const endpoints = query
-    ?`${TMDB_CONFIG.BASE_URL}/search/movies?query=${encodeURIComponent(query)}`
+    ?`${TMDB_CONFIG.BASE_URL}/search/movie?query=${encodeURIComponent(query)}`
     :`${TMDB_CONFIG.BASE_URL}/discover/movie?sort_by=popularity.desc`;
 
     const response = await fetch(endpoints,{
