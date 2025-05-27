@@ -8,6 +8,7 @@ import { fetchMovies } from "@/services/api";
 import { icons } from '@/constants/icons';
 import SearchBar from '@/components/searchbar';
 import { ActivityIndicator } from 'react-native';
+import { updateSearchCount } from '@/services/appwrite';
 
 const search = () => {
     
@@ -24,9 +25,14 @@ const search = () => {
   }), false);
     
     useEffect(() => {
+        
         const timeoutId = setTimeout(async () => {
             if (searchQuery.trim()) {
                 await loadMovies();
+                
+                if (movies?.length > 0 && movies?.[0]) {
+                    await updateSearchCount(searchQuery, movies[0]);
+                }
             } else {
                 reset()
             }
